@@ -3,21 +3,21 @@
 import { useState } from "react";
 
 const EXAMPLES = [
-  "fixed a race condition in the auth middleware",
-  "removed deprecated endpoint, migrated 2 million users to v2",
-  "bumped left-pad from 1.1.1 to 1.1.2",
-  "killed zombie processes that were eating all the memory",
-  "resolved merge conflict between frontend and backend teams",
+  "I was in my childhood home but it was also underwater and I could breathe",
+  "My dog was the size of a building and we were walking through a city made of clouds",
+  "I was late for a test at a school I've never been to and the hallways kept stretching longer",
+  "I could fly but only a few feet off the ground and everyone acted like it was normal",
+  "I was having dinner with someone I haven't seen in years in a restaurant that kept changing",
 ];
 
 export default function Home() {
-  const [changelog, setChangelog] = useState("");
+  const [dream, setDream] = useState("");
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function generate() {
-    if (!changelog.trim()) return;
+    if (!dream.trim()) return;
     setLoading(true);
     setError(null);
     setVideoUrl(null);
@@ -26,7 +26,7 @@ export default function Home() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ changelog }),
+        body: JSON.stringify({ dream }),
       });
 
       if (!res.ok) {
@@ -36,7 +36,7 @@ export default function Home() {
       const data = await res.json();
       setVideoUrl(`data:video/mp4;base64,${data.video}`);
     } catch {
-      setError("Video generation failed. Check your API key and try again.");
+      setError("Dream rendering failed. Check your API key and try again.");
     } finally {
       setLoading(false);
     }
@@ -55,9 +55,9 @@ export default function Home() {
       }}
     >
       <div style={{ textAlign: "center" }}>
-        <h1 style={{ fontSize: "2.5rem", margin: 0 }}>Changelog Cinema</h1>
+        <h1 style={{ fontSize: "2.5rem", margin: 0 }}>Dream Machine</h1>
         <p style={{ color: "#888", fontSize: "1.1rem", marginTop: "0.5rem" }}>
-          Paste a changelog entry. Get a cinematic trailer.
+          Describe a dream. Watch it come to life.
         </p>
       </div>
 
@@ -71,9 +71,9 @@ export default function Home() {
         }}
       >
         <textarea
-          value={changelog}
-          onChange={(e) => setChangelog(e.target.value)}
-          placeholder="fixed a race condition in the auth middleware..."
+          value={dream}
+          onChange={(e) => setDream(e.target.value)}
+          placeholder="I was flying over a city made of glass and the streets were rivers..."
           rows={3}
           style={{
             width: "100%",
@@ -91,7 +91,7 @@ export default function Home() {
 
         <button
           onClick={generate}
-          disabled={loading || !changelog.trim()}
+          disabled={loading || !dream.trim()}
           style={{
             padding: "0.75rem 1.5rem",
             fontSize: "1rem",
@@ -103,35 +103,9 @@ export default function Home() {
             cursor: loading ? "not-allowed" : "pointer",
           }}
         >
-          {loading ? "Generating... (this takes a minute or two)" : "Action!"}
+          {loading ? "Dreaming... (this takes a minute or two)" : "Fall Asleep"}
         </button>
 
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.5rem",
-          }}
-        >
-          {EXAMPLES.map((example) => (
-            <button
-              key={example}
-              onClick={() => setChangelog(example)}
-              style={{
-                padding: "0.4rem 0.75rem",
-                fontSize: "0.8rem",
-                background: "#1a1a1a",
-                border: "1px solid #333",
-                borderRadius: "20px",
-                color: "#888",
-                cursor: "pointer",
-                fontFamily: "monospace",
-              }}
-            >
-              {example}
-            </button>
-          ))}
-        </div>
       </div>
 
       {error && (

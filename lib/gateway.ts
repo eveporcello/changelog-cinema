@@ -1,4 +1,4 @@
-import { createGateway } from "ai";
+import { createGateway } from "@ai-sdk/gateway";
 import { Agent } from "undici";
 
 export const gateway = createGateway({

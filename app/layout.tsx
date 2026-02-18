@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Changelog Cinema",
-  description: "Turn boring changelogs into cinematic trailers",
+  title: "Dream Machine",
+  description: "Describe a dream. Watch it come to life.",
 };
 
 export default function RootLayout({

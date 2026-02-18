@@ -8,12 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
-    "ai": "^6.0.0",
-    "@ai-sdk/gateway": "^1.0.0",
+    "@ai-sdk/gateway": "^3.0.40",
+    "ai": "^6.0.79",
     "next": "^15.0.0",
-    "undici": "^7.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "undici": "^7.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

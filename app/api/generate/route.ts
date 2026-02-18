@@ -4,14 +4,16 @@ import { gateway } from "@/lib/gateway";
 export const maxDuration = 600;
 
 export async function POST(req: Request) {
-  const { changelog } = await req.json();
+  const { dream } = await req.json();
 
   const { video } = await generateVideo({
-    model: gateway.video("google/veo-3.1-generate-001"),
-    prompt: `Cinematic, dramatic scene that literally and visually depicts: "${changelog}".
-Interpret any developer jargon as literally as possible.
-For example, "race condition" should show an actual race, "migration" should show an actual migration of animals or people.
-Movie trailer style. Epic lighting. Slow motion. No text or words on screen.`,
+    model: gateway.videoModel("google/veo-3.1-generate-001"),
+    prompt: `Surreal, dreamlike cinematic scene depicting: "${dream}".
+The main character is a medium-height, athletic light-skinned mixed-race man with a broad build, short curly afro hair, striking blue eyes, and a big warm smile.
+This is a dream sequence — embrace impossible physics, shifting environments, and strange juxtapositions.
+Soft, hazy lighting. Slow, fluid camera movements. Ethereal atmosphere.
+Things can morph, scale can shift, locations can blend into each other.
+No text or words on screen. Dreamlike color grading.`,
     aspectRatio: "16:9",
   });
 
